@@ -4,6 +4,7 @@ import React, { useState } from "react"
 const Courses = () => {
 	const [cart, setcart] = useState<string[]>([])
 	const [level, setlevel] = useState("All")
+	const [search, setsearch] = useState("")
 
 	const handleToggleCartClick = (courseNum: any) => {
 		if (cart.includes(courseNum)) {
@@ -19,28 +20,52 @@ const Courses = () => {
 	}
 
 	const filtercourse = courses.filter((course: any) => {
-		const coursenumstr = String(course.number)
+		const searchterm = search.trim().toLowerCase()
+		let matchlevel = false
+		let matchsearch = false
 
 		if (level === "All") {
-			return true
+			matchlevel = true
 		}
-		else if (level === "1000") {
-			return coursenumstr.startsWith("1")
+		else if (level === "1000" && course.number <= 2000 ) {
+			matchlevel = true
 		}
-		else if (level === "2000") {
-			return coursenumstr.startsWith("2")
+		else if (level === "2000" && course.number >= 2000 && course.number < 3000) {
+			matchlevel = true
 		}
-		else if (level === "3000") {
-			return coursenumstr.startsWith("3")
+		else if (level === "3000" && course.number >= 3000 && course.number < 4000) {
+			matchlevel = true
 		}
-		else if (level === "4000") {
-			return coursenumstr.startsWith("4")
+		else if (level === "4000" && course.number >= 4000) {
+			matchlevel = true
 		}
-		return false
+
+		if (search === "") {
+			matchsearch = true
+		}
+		else if (String(course.number).includes(searchterm)) {
+			matchsearch = true
+		}
+		else if (course.title.toLowerCase().includes(searchterm)) {
+			matchsearch = true
+		}
+		else if (course.description.toLowerCase().includes(searchterm)) {
+			matchsearch = true
+		}
+
+		return matchlevel && matchsearch
 	})
 
 	return (
 		<>
+		<input className = "searchbar"
+			type = "text"
+			value = {search}
+			onChange = {(e) => {setsearch(e.target.value)}}>
+		</input>
+
+		<h4 className = "filterheading">Filter based on course level</h4>
+
 		<select value={level} onChange={(e) => setlevel(e.target.value)}>
             <option value="All">All Levels</option>
             <option value="1000">1000 Level</option>
@@ -60,7 +85,7 @@ const Courses = () => {
 						"cross-listed": crossListed,
 					}: any
 				) => {
-					const isincart = cart.includes(String(number)) 
+					const isincart = cart.includes(number)
 
 					return (
 					<div key={number}>
