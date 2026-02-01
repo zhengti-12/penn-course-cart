@@ -59,6 +59,34 @@ button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
+.userfunc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	gap: 12 px;
+    margin: 40px 0;
+}
+
+.userfunc select {
+	background-color: #02577a;
+	font-family: inherit;
+	color: #d4f0fc;
+	padding: 5px
+}
+
+.searchbar {
+	width:80%;
+	padding: 15px;
+	max-width: 400px;
+	background-color: #1a1a1a;  
+	color: #d4f0fc;
+	border:  3px solid #02577a;
+}
+
+.filterheading{
+	margin-bottom: 5px;
+	margin-top:15px;
+}
 .cartbtn {
 	top: 20px;
 	right: 20px;
@@ -76,9 +104,15 @@ button:focus-visible {
 
     background-color: #1a1a1a;  
     padding: 30px;
+	border: 7px solid #02577a;
     
 	width: fit-content;
     height: fit-content;
     min-width: 350px;
     max-height: 80vh;
+}
+
+.coursetitle {
+    color: #02577a;
+    font-size: 1.1rem;
 }

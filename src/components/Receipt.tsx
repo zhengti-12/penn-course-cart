@@ -10,7 +10,7 @@ const Receipt = ({ cart }: any) => {
     return (
         <div>
             <h1>Registration Successful</h1>
-            <p>Thank you for enrolling! Here is your official course summary:</p>
+            <p>Here is your course receipt:</p>
             <hr />
 
             <div className="receipt-list">
@@ -22,7 +22,9 @@ const Receipt = ({ cart }: any) => {
                 ))}
             </div>
 
-            <Link to="/">← Back to Search</Link>
+            <Link to="/"
+            style={{ color: '#d4f0fc', fontWeight: 'bold' }}>
+            Back to Search</Link>
         </div>
     );
 };

@@ -77,6 +77,14 @@ const Courses = ({ cart, setcart }: any) => {
 		navigate('/receipt')}
 	};
 
+	const openCart = () => {
+    if (cart.length === 0) {
+        alert("Your cart is currently empty!");
+    } else {
+        setcartpopup(true);
+    }
+	};
+
 	return (
 	<div className ="pagefunctions">
 		<div className ="userfunc">
@@ -95,7 +103,7 @@ const Courses = ({ cart, setcart }: any) => {
 			<option value="4000">4000</option>
         </select>
 
-			<button className = "cartbtn" onClick ={() => setcartpopup(true)}>
+			<button className = "cartbtn" onClick ={openCart}>
 				Cart: ({cart.length})
 			</button>
 		</div>
