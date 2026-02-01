@@ -125,7 +125,7 @@ const Courses = ({ cart, setcart }: any) => {
 					return (
 						<div key={number}>
 						<br />
-						<b>
+						<b className = "coursetitle">
 							{dept} {number}: {title}
 						</b>
 						<br />
