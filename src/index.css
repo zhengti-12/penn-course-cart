@@ -28,7 +28,7 @@ a:hover {
 
 body {
 	margin: 0;
-	display: flex;
+	display: block;
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
@@ -42,12 +42,12 @@ h1 {
 button {
 	border-radius: 8px;
 	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	color: inherit;
+	padding: 0.4em 1.0em;
+	color: #d4f0fc;
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
+	background-color: #02577a;
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
@@ -57,4 +57,28 @@ button:hover {
 button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
+}
+
+.cartbtn {
+	top: 20px;
+	right: 20px;
+	position: fixed
+}
+
+.popupoverlay {
+    position: fixed;
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 9999;  
+
+    background-color: #1a1a1a;  
+    padding: 30px;
+    
+	width: fit-content;
+    height: fit-content;
+    min-width: 350px;
+    max-height: 80vh;
 }

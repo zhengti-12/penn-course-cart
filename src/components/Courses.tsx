@@ -1,10 +1,12 @@
 import courses from "../data/courses.json"
 import React, { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 
-const Courses = () => {
-	const [cart, setcart] = useState<string[]>([])
+const Courses = ({ cart, setcart }: any) => {
 	const [level, setlevel] = useState("All")
 	const [search, setsearch] = useState("")
+	const [cartpopup, setcartpopup] = useState(false)
+	const navigate = useNavigate();
 
 	const handleToggleCartClick = (courseNum: any) => {
 		if (cart.includes(courseNum)) {
@@ -56,8 +58,28 @@ const Courses = () => {
 		return matchlevel && matchsearch
 	})
 
+	const cartcontent = () => {
+	let tempcart = []
+	for (let x=0; x < courses.length; x++) {
+		if (cart.includes(courses[x].number)){
+			tempcart.push(courses[x])
+		}
+	}
+	return tempcart
+	}
+	const cartitem = cartcontent()
+
+	const checkout = () => {
+    	if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+		} else {
+		navigate('/receipt')}
+	};
+
 	return (
-		<>
+	<div className ="pagefunctions">
+		<div className ="userfunc">
 		<input className = "searchbar"
 			type = "text"
 			value = {search}
@@ -73,6 +95,12 @@ const Courses = () => {
 			<option value="4000">4000</option>
         </select>
 
+			<button className = "cartbtn" onClick ={() => setcartpopup(true)}>
+				Cart: ({cart.length})
+			</button>
+		</div>
+
+		<div className = "courselist">
 			{filtercourse.map(
 				(
 					{
@@ -87,7 +115,7 @@ const Courses = () => {
 					const isincart = cart.includes(number)
 
 					return (
-					<div key={number}>
+						<div key={number}>
 						<br />
 						<b>
 							{dept} {number}: {title}
@@ -114,14 +142,29 @@ const Courses = () => {
 							{!cart.includes(number) && (
 								<button onClick={() => handleToggleCartClick(number)}>
 								Add to cart
-							</button>
+								</button>
 							)}
 						</div>
 					</div>
 				)
 			}
 		)}
-		</>
+		</div>
+
+		{cartpopup && (
+			<div className = "popupoverlay">
+				<h3>Cart</h3>
+				{cartitem.map((item) => (
+					<div key={item.number}>
+						{item.dept}{item.number}: {item.title}
+					</div>
+				))}
+
+				<button onClick = {() => setcartpopup(false)}>close</button>
+				<button onClick = {checkout}>checkout</button>
+			</div>
+		)}
+	</div>
 	)
 }
 
