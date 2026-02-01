@@ -27,16 +27,16 @@ const Courses = () => {
 		if (level === "All") {
 			matchlevel = true
 		}
-		else if (level === "1000" && course.number <= 2000 ) {
+		else if (level === "1000" && course.number < 200 ) {
 			matchlevel = true
 		}
-		else if (level === "2000" && course.number >= 2000 && course.number < 3000) {
+		else if (level === "2000" && course.number >= 200 && course.number < 300) {
 			matchlevel = true
 		}
-		else if (level === "3000" && course.number >= 3000 && course.number < 4000) {
+		else if (level === "3000" && course.number >= 300 && course.number < 400) {
 			matchlevel = true
 		}
-		else if (level === "4000" && course.number >= 4000) {
+		else if (level === "4000" && course.number >= 400) {
 			matchlevel = true
 		}
 
@@ -61,17 +61,16 @@ const Courses = () => {
 		<input className = "searchbar"
 			type = "text"
 			value = {search}
-			onChange = {(e) => {setsearch(e.target.value)}}>
-		</input>
+			onChange = {(e) => {setsearch(e.target.value)}}/>
 
 		<h4 className = "filterheading">Filter based on course level</h4>
 
 		<select value={level} onChange={(e) => setlevel(e.target.value)}>
             <option value="All">All Levels</option>
-            <option value="1000">1000 Level</option>
-            <option value="2000">2000 Level</option>
-			<option value="3000">3000 level</option>
-			<option value="4000">4000 level</option>
+            <option value="1000">1000</option>
+            <option value="2000">2000</option>
+			<option value="3000">3000</option>
+			<option value="4000">4000</option>
         </select>
 
 			{filtercourse.map(
@@ -112,9 +111,11 @@ const Courses = () => {
 							</>
 						)}
 						<div>
-							<button onClick={() => handleToggleCartClick(number)}>
-								{isincart ? "Remove from Cart" : "Add to Cart"}
+							{!cart.includes(number) && (
+								<button onClick={() => handleToggleCartClick(number)}>
+								Add to cart
 							</button>
+							)}
 						</div>
 					</div>
 				)
